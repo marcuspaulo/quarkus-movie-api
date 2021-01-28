@@ -3,6 +3,7 @@ package br.com.mp.quarkusmovie.resources;
 import br.com.mp.quarkusmovie.restclient.IMDBAPIRestClient;
 import br.com.mp.quarkusmovie.restclient.model.MovieIMDB;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ public class MovieResource {
     @RestClient
     IMDBAPIRestClient imdbapiRestClient;
 
+    @Tag(name="movie")
     @GET
     @Path("/search/{query}")
     @Produces(MediaType.APPLICATION_JSON)
