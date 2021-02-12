@@ -13,7 +13,7 @@ html{
 
 body{
     margin:0;
-    background: white;
+    //background: white;
 }
 
 .swagger-ui .topbar {
@@ -29,5 +29,5 @@ body{
 }
 
 .bg-dark {
-    background-color: whitesmoke !important;
+    //background-color: whitesmoke !important;
 }
