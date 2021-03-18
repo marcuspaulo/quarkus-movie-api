@@ -32,6 +32,12 @@ public class MovieResource {
         return movieService.list();
     }
 
+    @GET
+    @Path("/listBestRated")
+    public List<Movie> listBestRated() {
+        return movieService.listBestRated();
+    }
+
     @POST
     @Path("/add")
     public Movie add(UserMovieModelAPI userMovieModelAPI) {

@@ -50,6 +50,10 @@ public class MovieService {
         return movieIMDB;
     }
 
+    public List<Movie> listBestRated() {
+        return movieRepository.listBestRated();
+    }
+
     private void saveMovieDatabase(MovieIMDB movieIMDB) {
         List<Movie> movies = new ArrayList<>();
 
