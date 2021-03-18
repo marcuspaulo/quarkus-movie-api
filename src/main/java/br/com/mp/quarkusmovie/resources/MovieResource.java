@@ -11,6 +11,7 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/movies")
@@ -40,7 +41,8 @@ public class MovieResource {
 
     @POST
     @Path("/add")
-    public Movie add(UserMovieModelAPI userMovieModelAPI) {
-        return movieService.add(userMovieModelAPI);
+    public Response add(UserMovieModelAPI userMovieModelAPI) {
+         Movie movie = movieService.add(userMovieModelAPI);
+         return Response.status(Response.Status.CREATED).entity(movie).build();
     }
 }

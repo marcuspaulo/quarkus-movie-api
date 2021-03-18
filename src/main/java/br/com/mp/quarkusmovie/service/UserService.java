@@ -17,6 +17,5 @@ public class UserService {
     public User create(User user) {
         userRepository.persist(user);
         return user;
-
     }
 }

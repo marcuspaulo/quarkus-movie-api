@@ -1,19 +1,21 @@
 CREATE TABLE movie (
-  id serial PRIMARY KEY  -- implicit primary key constraint
-, name    text NOT null
-, imdb_id  text NOT null UNIQUE
-, image_url text
-, qualifier text
-, rank numeric
-, staff text
-, year numeric
+  id serial NOT NULL,
+  name    text NOT null,
+  imdb_id  text NOT null UNIQUE,
+  image_url text,
+  qualifier text,
+  rank numeric,
+  staff text,
+  year numeric,
+  constraint PK_MOVIE primary key (ID)
 );
 
 CREATE TABLE "users" (
-  id  serial PRIMARY KEY
-, name     text NOT null
-, email     text NOT NULL
-, password     text NOT null
+  id  serial NOT NULL,
+  name     text NOT null,
+  email     text NOT NULL,
+  password     text NOT null,
+  constraint PK_USER primary key (ID)
 );
 
 CREATE TABLE user_movie (

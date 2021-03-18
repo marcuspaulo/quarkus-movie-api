@@ -1,5 +1,6 @@
 package br.com.mp.quarkusmovie.model;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -9,11 +10,10 @@ import java.util.Objects;
 @Table(name = "users")
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -21,20 +21,22 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
+    @JsonbTransient
     @Column(name = "password")
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
-    private Collection<UserMovie> userMovieCollection;
+//    @Transient
+//    @OneToMany(mappedBy = "movie")
+//    private Collection<UserMovie> userMovieCollection;
 
     public User() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -62,13 +64,13 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Collection<UserMovie> getUserMovieCollection() {
-        return userMovieCollection;
-    }
-
-    public void setUserMovieCollection(Collection<UserMovie> userMovieCollection) {
-        this.userMovieCollection = userMovieCollection;
-    }
+//    public Collection<UserMovie> getUserMovieCollection() {
+//        return userMovieCollection;
+//    }
+//
+//    public void setUserMovieCollection(Collection<UserMovie> userMovieCollection) {
+//        this.userMovieCollection = userMovieCollection;
+//    }
 
     @Override
     public boolean equals(Object o) {

@@ -20,7 +20,7 @@ public class UserMovie implements Serializable {
     private boolean isAlreadyWatched;
 
     @JoinColumn(name = "movie_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
+    @ManyToOne()
     private Movie movie;
 
     public UserMovie() {
