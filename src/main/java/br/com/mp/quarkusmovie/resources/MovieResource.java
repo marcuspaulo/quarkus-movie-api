@@ -60,6 +60,6 @@ public class MovieResource {
         String emailUser = jwt.getClaim(Claims.email.name());
 
          Movie movie = movieService.add(userMovieModelAPI, emailUser);
-         return Response.status(Response.Status.CREATED).build();
+         return Response.status(Response.Status.CREATED).entity(movie).build();
     }
 }

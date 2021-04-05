@@ -56,6 +56,10 @@ CREATE TABLE user_movie (
 
 
 INSERT INTO "public"."users"("id","name","email","password") VALUES (12, 'marcus', 'mp@br.com', 'abc123');
+INSERT INTO public.users
+(id, name, email, "password")
+VALUES(4, 'Marcus', 'mp@mp.com', '$2a$10$FcG1IphW0bJ8kRIgkBot1.2j0Yg5p2O6v07XtPiQveA9v9ICt8NMG');
+
 
 INSERT INTO "public"."movie"("id","name","imdb_id","image_url","qualifier","rank","staff","year")
 VALUES
