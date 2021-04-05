@@ -28,6 +28,13 @@ public class GeneralExceptions implements ExceptionMapper<Exception> {
             return Response.status(Response.Status.BAD_REQUEST).entity(messageError).build();
         }
 
-        return null;
+        if (e instanceof BusinessException) {
+            messageError.setMessage(e.getMessage());
+            System.out.println(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(messageError).build();
+        }
+
+        System.out.println(e.getMessage());
+        return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro: Por favor, entre em contato com o suporte").build();
     }
 }

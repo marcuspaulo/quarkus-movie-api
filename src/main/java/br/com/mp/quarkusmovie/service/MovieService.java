@@ -1,5 +1,7 @@
 package br.com.mp.quarkusmovie.service;
 
+import br.com.mp.quarkusmovie.exception.BusinessException;
+import br.com.mp.quarkusmovie.exception.GeneralExceptions;
 import br.com.mp.quarkusmovie.model.Movie;
 import br.com.mp.quarkusmovie.model.User;
 import br.com.mp.quarkusmovie.model.UserMovie;
@@ -16,8 +18,11 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.ws.rs.NotFoundException;
+import javax.ws.rs.ServerErrorException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class MovieService {
@@ -73,13 +78,18 @@ public class MovieService {
     }
 
     @Transactional
-    public Movie add(UserMovieModelAPI userMovieModelAPI) {
-        User user = userRepository.findById(userMovieModelAPI.getUserId());
+    public Movie add(UserMovieModelAPI userMovieModelAPI, String emailUser) {
+
+        if (!userMovieModelAPI.getAlreadyWatched()) {
+            throw new BusinessException("Erro: Para dar nota, você precisa ter assistido o filme!");
+        }
+
+        Optional<User> user = userRepository.findByEmail(emailUser);
 
         Movie movie = movieRepository.findByIMDBId(userMovieModelAPI.getMovieIMDBId());
 
         UserMoviePK userMoviePK = new UserMoviePK();
-        userMoviePK.setUserId(user.getId());
+        userMoviePK.setUserId(user.get().getId());
         userMoviePK.setMovieId(movie.getId());
 
         UserMovie userMovie = new UserMovie();
@@ -89,7 +99,7 @@ public class MovieService {
         userMovie.setWatchlist(userMovieModelAPI.getWatchlist());
         userMovie.setRate(userMovieModelAPI.getRate());
 
-        userMovieRepository.persist(userMovie);
+        userMovieRepository.getEntityManager().merge(userMovie);
 
         return movie;
 

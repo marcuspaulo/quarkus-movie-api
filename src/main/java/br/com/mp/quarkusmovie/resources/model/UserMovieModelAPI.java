@@ -2,19 +2,10 @@ package br.com.mp.quarkusmovie.resources.model;
 
 public class UserMovieModelAPI {
 
-    private Long userId;
     private String movieIMDBId;
     private Boolean alreadyWatched;
     private Boolean watchlist;
     private Integer rate;
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public String getMovieIMDBId() {
         return movieIMDBId;
